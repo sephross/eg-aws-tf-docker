@@ -1,0 +1,67 @@
+[
+    {
+        "name": "goals-api",
+        "image": "sephross/aws-goals-api",
+        "cpu": 1,
+        "memoryReservation": 128,
+        "essential": true,
+        "command": [
+            "node",
+            "app.js"
+        ],
+        "environment": [
+            {
+                "name": "MONGODB_USERNAME",
+                "value": "seph"
+            },
+            {
+                "name": "MONGODB_PASSWORD",
+                "value": "secret"
+            },
+            {
+                "name": "MONGODB_URL",
+                "value": "localhost"
+            }
+        ],
+        "portMappings": [
+            {
+                "containerPort": 80,
+                "hostPort": 80
+            },
+            {
+                "containerPort": 443,
+                "hostPort": 443
+            }
+        ]
+    },
+    {
+        "name": "mongodb",
+        "image": "mongo",
+        "cpu": 1,
+        "memoryReservation": 128,
+        "essential": true,
+        "environment": [
+            {
+                "name": "MONGO_INITDB_ROOT_USERNAME",
+                "value": "seph"
+            },
+            {
+                "name": "MONGO_INITDB_ROOT_PASSWORD",
+                "value": "secret"
+            }
+        ],
+        "portMappings": [
+            {
+                "containerPort": 27017,
+                "hostPort": 27017
+            }
+        ],
+        "mountPoints": [
+            {
+                "containerPath": "/data/db",
+                "sourceVolume": "efs-sandbox-goalsTracker",
+                "readOnly": false
+            }
+        ]
+    }
+]
