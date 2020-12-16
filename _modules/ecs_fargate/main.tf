@@ -36,7 +36,7 @@ resource "aws_ecs_task_definition" "main" {
 
 # ecs service
 resource "aws_ecs_service" "main" {
-  name             = "ecs-svc-sandbox-${local.app_name}"
+  name             = "ecs-svc-${local.app_name}"
   cluster          = aws_ecs_cluster.main.id
   task_definition  = aws_ecs_task_definition.main.arn
   launch_type      = "FARGATE"

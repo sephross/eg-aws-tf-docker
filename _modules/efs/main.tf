@@ -37,7 +37,10 @@ resource "aws_efs_file_system" "main" {
 
 # efs mount points
 resource "aws_efs_mount_target" "main" {
-  for_each        = local.subnets != [] ? toset(local.subnets) : []
+  for_each = {
+    for k, v in local.subnets : k => v
+    if local.subnets != [] # check if public subnets exist. If not - skip.
+  }
   file_system_id  = aws_efs_file_system.main.id
   subnet_id       = each.value
   security_groups = [aws_security_group.efs.id]

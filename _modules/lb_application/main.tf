@@ -38,6 +38,7 @@ resource "aws_lb_listener" "main" {
 
 # target group
 resource "aws_lb_target_group" "main" {
+  depends_on  = [aws_lb.main]
   name        = "lb-tg-${var.app_name}"
   port        = local.tg_port
   protocol    = local.tg_protocol
