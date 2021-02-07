@@ -29,6 +29,7 @@ variable "location" {
 variable "app_name" {
   type        = string
   description = "shortform application name"
+  default = "sandbox-goalsTracker"
 }
 
 variable "vpc_cidr" {
